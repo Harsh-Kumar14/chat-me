@@ -1,0 +1,41 @@
+# Render blueprint for the backend (single-process deployment).
+# In Render: New → Blueprint → connect this repo. Render reads this file and
+# pre-fills the service. You'll be prompted for the values marked `sync: false`.
+# Full walkthrough: backend/DEPLOY.md
+services:
+  - type: web
+    name: gpt-rag-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: FRONTEND_URL
+        sync: false   # your deployed Vercel origin, e.g. https://your-app.vercel.app
+      - key: MONGO_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: AWS_REGION
+        value: ap-south-1
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_KEY
+        sync: false
+# NOTE: the Firebase key is NOT an env var. Add it in the Render dashboard under
+# Environment → Secret Files at path: services/auth/serviceAccountKey.json
