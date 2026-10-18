@@ -19,7 +19,6 @@ const PORT = process.env.PORT || 8000;
 // app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://chat-me-smoky.vercel.app",
 ];
 
