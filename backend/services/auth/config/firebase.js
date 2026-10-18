@@ -1,6 +1,19 @@
 
 import { initializeApp, cert, getApps } from "firebase-admin/app";
-import serviceAccount from "../serviceAccountKey.json" with { type: "json" };
+
+const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT;
+
+if (!serviceAccountJson) {
+  throw new Error("FIREBASE_SERVICE_ACCOUNT is missing");
+}
+
+let serviceAccount;
+
+try {
+  serviceAccount = JSON.parse(serviceAccountJson);
+} catch {
+  throw new Error("FIREBASE_SERVICE_ACCOUNT must contain valid JSON");
+}
 
 export const app =
   getApps().length === 0
