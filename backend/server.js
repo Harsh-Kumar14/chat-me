@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 
 import protect from "./gateway/middleware/auth.middleware.js";
@@ -16,7 +16,20 @@ import agentRouter from "./services/agent/routes/agent.route.js";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+// app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://chat-me-smoky.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
 app.use(cookieParser());
 app.use(express.json());
 

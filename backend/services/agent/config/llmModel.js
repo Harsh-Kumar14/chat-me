@@ -3,6 +3,7 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai"
 import { ChatOpenRouter } from "@langchain/openrouter";
 
 const groq = new ChatGroq({
+    apiKey: process.env.GROQ_API_KEY,
     model: "openai/gpt-oss-120b",
     temperature: 0,
     maxTokens: undefined,
@@ -11,12 +12,14 @@ const groq = new ChatGroq({
 
 
 const gemini= new ChatGoogleGenerativeAI({
+    apiKey: process.env.GOOGLE_API_KEY,
     model: "gemini-2.5-flash",
     temperature: 0,
     maxRetries: 2,
 })
 
 const openrouter= new ChatOpenRouter({
+    apiKey: process.env.OPENROUTER_API_KEY,
     model: "deepseek/deepseek-chat",
     temperature:0,
     maxTokens:3000
